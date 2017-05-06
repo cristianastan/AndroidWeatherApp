@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">WeatherApp</string>
+    <string name="getCity">Type a city</string>
+    <string name="useLocation">Use my location</string>
+    <string name="getWeather">Get city weather</string>
+    <string name="Location">Location:</string>
+    <string name="LocationVal">London</string>
+    <string name="Temperature">Temperature:</string>
+    <string name="TemperatureVal">10 C</string>
+    <string name="Description">Description:</string>
+    <string name="DescriptionVal">Rainy</string>
+    <string name="Humidity">Humidity:</string>
+    <string name="HumidityVal">53</string>
+    <string name="Pressure">Pressure:</string>
+    <string name="PressureVal">1015 bars</string>
+    <string name="WindSpeedVal">50 m/s</string>
+    <string name="daysButton">View 10 days\nweather</string>
+    <string name="currentDate">Apr, 28th\n 10:00</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,70 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.cristiana.weatherapp.DayDetailsFragment">
+
+    <ImageView
+        android:layout_width="@dimen/imageWidth"
+        android:layout_height="@dimen/imageHeight"
+        android:padding="@dimen/mediumPadding"
+        android:layout_margin="@dimen/mediumMargin"
+        android:layout_gravity="center"
+        android:src="@drawable/oneday"/>
+
+    <TextView
+        android:id="@+id/fragmentLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/LocationVal"
+        android:padding="@dimen/smallPadding"
+        android:layout_gravity="center"
+        android:textColor="@color/textValue"
+        android:layout_margin="@dimen/smallMargin"
+        android:textSize="@dimen/textSize"/>
+
+    <TextView
+        android:id="@+id/fragmentTemperature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/TemperatureVal"
+        android:padding="@dimen/smallPadding"
+        android:layout_gravity="center"
+        android:textColor="@color/textName"
+        android:layout_margin="@dimen/smallMargin"
+        android:textSize="@dimen/textSize"/>
+
+    <TextView
+        android:id="@+id/fragmentDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/DescriptionVal"
+        android:padding="@dimen/smallPadding"
+        android:layout_gravity="center"
+        android:textColor="@color/textName"
+        android:layout_margin="@dimen/smallMargin"
+        android:textSize="@dimen/textSize"/>
+
+    <TextView
+        android:id="@+id/fragmentPressure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/PressureVal"
+        android:padding="@dimen/smallPadding"
+        android:layout_gravity="center"
+        android:textColor="@color/textName"
+        android:layout_margin="@dimen/smallMargin"
+        android:textSize="@dimen/textSize"/>
+    <TextView
+        android:id="@+id/fragmentWindSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/WindSpeedVal"
+        android:padding="@dimen/smallPadding"
+        android:layout_gravity="center"
+        android:textColor="@color/textName"
+        android:layout_margin="@dimen/smallMargin"
+        android:textSize="@dimen/textSize"/>
+
+</LinearLayout>

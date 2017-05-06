@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mediumPadding">20dp</dimen>
+    <dimen name="smallPadding">10dp</dimen>
+    <dimen name="mediumMargin">20dp</dimen>
+    <dimen name="bigMargin">40dp</dimen>
+    <dimen name="smallMargin">5dp</dimen>
+    <dimen name="imageWidth">125dp</dimen>
+    <dimen name="imageHeight">125dp</dimen>
+    <dimen name="textSize">20sp</dimen>
+    <dimen name="smallTextSize">15sp</dimen>
+    <dimen name="bigTextSize">25dp</dimen>
+</resources>

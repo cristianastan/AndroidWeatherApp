@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.example.cristiana.weatherapp.MainActivity"
+              android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="@dimen/imageWidth"
+        android:layout_height="@dimen/imageHeight"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/bigMargin"
+        android:src="@drawable/logo"/>
+
+    <Button
+        android:id="@+id/locationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/useLocation"
+        android:layout_gravity="center"
+        android:padding="@dimen/mediumPadding"
+        android:layout_margin="@dimen/mediumMargin"
+        android:background="@color/colorButton"
+        android:fontFamily="casual"/>
+
+    <EditText
+        android:id="@+id/city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/getCity"
+        android:layout_marginBottom="@dimen/mediumMargin"
+        android:layout_marginTop="@dimen/mediumMargin"
+        android:layout_marginLeft="@dimen/bigMargin"
+        android:layout_marginRight="@dimen/bigMargin"
+        android:gravity="center"/>
+
+    <Button
+        android:id="@+id/cityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getWeather"
+        android:layout_gravity="center"
+        android:padding="@dimen/mediumPadding"
+        android:layout_margin="@dimen/mediumMargin"
+        android:background="@color/colorButton2"
+        android:fontFamily="casual"/>
+
+</LinearLayout>
