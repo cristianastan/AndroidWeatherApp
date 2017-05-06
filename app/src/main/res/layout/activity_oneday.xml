@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              tools:context="com.example.cristiana.weatherapp.OneDayActivity">
+
+    <ImageView
+        android:id="@+id/weatherImage"
+        android:layout_width="@dimen/imageWidth"
+        android:layout_height="@dimen/imageWidth"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/mediumMargin"
+        android:src="@drawable/oneday"
+        android:padding="@dimen/mediumPadding"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/bigMargin"
+        android:layout_marginRight="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/mediumPadding"
+            android:text="@string/Location"
+            android:gravity="right"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textName"/>
+
+        <TextView
+            android:id="@+id/locationValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/LocationVal"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textValue"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/bigMargin"
+        android:layout_marginRight="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/mediumPadding"
+            android:text="@string/Temperature"
+            android:gravity="right"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textName"/>
+
+        <TextView
+            android:id="@+id/temperatureValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/TemperatureVal"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textValue"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/bigMargin"
+        android:layout_marginRight="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/mediumPadding"
+            android:text="@string/Description"
+            android:gravity="right"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textName"/>
+
+        <TextView
+            android:id="@+id/descriptionValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/DescriptionVal"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textValue"/>
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="@dimen/bigMargin"
+    android:layout_marginRight="@dimen/bigMargin"
+    android:layout_marginTop="@dimen/smallMargin"
+    android:layout_marginBottom="@dimen/smallMargin"
+    android:weightSum="2">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingRight="@dimen/mediumPadding"
+        android:text="@string/Humidity"
+        android:gravity="right"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/textName"/>
+
+    <TextView
+        android:id="@+id/humidityValue"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/HumidityVal"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/textValue"/>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/bigMargin"
+        android:layout_marginRight="@dimen/bigMargin"
+        android:layout_marginTop="@dimen/smallMargin"
+        android:layout_marginBottom="@dimen/smallMargin"
+        android:weightSum="2">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/mediumPadding"
+            android:text="@string/Pressure"
+            android:gravity="right"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textName"/>
+
+        <TextView
+            android:id="@+id/pressureValue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/PressureVal"
+            android:textSize="@dimen/textSize"
+            android:textColor="@color/textValue"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/daysButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/daysButton"
+        android:textSize="@dimen/smallTextSize"
+        android:padding="@dimen/smallPadding"
+        android:layout_margin="@dimen/mediumMargin"
+        android:layout_gravity="center"
+        android:fontFamily="casual"
+        android:background="@color/colorButton"/>
+
+</LinearLayout>
