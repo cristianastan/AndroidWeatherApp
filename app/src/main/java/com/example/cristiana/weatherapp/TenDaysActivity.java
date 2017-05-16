@@ -1,7 +1,10 @@
 package com.example.cristiana.weatherapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
@@ -18,9 +21,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.cristiana.weatherapp.database.DbContract;
+import com.example.cristiana.weatherapp.database.WeatherContentProvider;
 import com.example.cristiana.weatherapp.model.Forecast;
+import com.example.cristiana.weatherapp.model.Main;
 import com.example.cristiana.weatherapp.model.TenDaysWeather;
+import com.example.cristiana.weatherapp.model.Weather;
 import com.example.cristiana.weatherapp.model.WeatherApp;
+import com.example.cristiana.weatherapp.model.Wind;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -54,7 +62,6 @@ public class TenDaysActivity extends AppCompatActivity {
 
         /* get the location name */
         mLocationName = getIntent().getStringExtra(LOC_SAVED);
-        fetchWeather();
 
         /* set layout manager */
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -76,6 +83,7 @@ public class TenDaysActivity extends AppCompatActivity {
                 } else {
                     Intent intent = new Intent(TenDaysActivity.this, DayDetailsActivity.class);
                     intent.putExtra("location", mLocationName);
+                    intent.putExtra("date", forecast.getDtTxt());
                     intent.putExtra("temperature", forecast.getMain().getTemp());
                     intent.putExtra("description", forecast.getWeather().get(0).getDescription());
                     intent.putExtra("pressure", forecast.getMain().getPressure());
@@ -86,6 +94,10 @@ public class TenDaysActivity extends AppCompatActivity {
             }
         });
         mRecyclerView.setAdapter(adapter);
+
+        updateUIFromDB();
+
+        fetchWeather();
     }
 
     @Override
@@ -111,6 +123,83 @@ public class TenDaysActivity extends AppCompatActivity {
         return false;
     }
 
+    private void updateUIFromDB() {
+        Cursor cursor = getContentResolver().query(WeatherContentProvider.DAY_URI, null, null, null, null);
+
+        if (cursor != null) {
+            /* Move to the first position */
+            if (cursor.moveToFirst()) {
+                List<Forecast> forecasts = new ArrayList<>();
+
+                /* get the column ids */
+                int idIndex = cursor.getColumnIndex(DbContract.Day.ID);
+                int locationIndex = cursor.getColumnIndex(DbContract.Day.LOCATION);
+                int dateIndex = cursor.getColumnIndex(DbContract.Day.DATE);
+                int temperatureIndex = cursor.getColumnIndex(DbContract.Day.TEMPERATURE);
+                int descriptionIndex = cursor.getColumnIndex(DbContract.Day.DESCRIPTIOn);
+                int pressureIndex = cursor.getColumnIndex(DbContract.Day.PRESSURE);
+                int windSpeedIndex = cursor.getColumnIndex(DbContract.Day.WIND_SPEED);
+
+                do {
+                    Main main = new Main();
+                    Weather weather = new Weather();
+                    List<Weather> weatherList = new ArrayList<>();
+                    Wind wind = new Wind();
+                    Forecast forecast = new Forecast();
+
+                    forecast.setDt(cursor.getInt(idIndex));
+                    main.setTemp(cursor.getDouble(temperatureIndex));
+                    main.setPressure(cursor.getDouble(pressureIndex));
+                    weather.setDescription(cursor.getString(descriptionIndex));
+                    wind.setSpeed(cursor.getDouble(windSpeedIndex));
+
+                    weatherList.add(weather);
+                    forecast.setDtTxt(cursor.getString(dateIndex));
+                    forecast.setWeather(weatherList);
+                    forecast.setMain(main);
+                    forecast.setWind(wind);
+
+                    mLocationName = cursor.getString(locationIndex);
+
+                    forecasts.add(forecast);
+
+                } while (cursor.moveToNext());
+
+                adapter.setData(forecasts);
+                adapter.notifyDataSetChanged();
+
+                cursor.close();
+            }
+        }
+    }
+
+    private void handleNetworkResponse(TenDaysWeather tenDaysWeather) {
+        List<Forecast> forecasts = tenDaysWeather.getForecast();
+
+        for (Forecast forecast : forecasts) {
+            ContentValues values = new ContentValues();
+
+            /* Add the information to the content values */
+            values.put(DbContract.Day.ID, forecast.getDt());
+            values.put(DbContract.Day.LOCATION, mLocationName);
+            values.put(DbContract.Day.DATE, forecast.getDtTxt());
+            values.put(DbContract.Day.TEMPERATURE, forecast.getMain().getTemp());
+            values.put(DbContract.Day.DESCRIPTIOn, forecast.getWeather().get(0).getDescription());
+            values.put(DbContract.Day.PRESSURE, forecast.getMain().getPressure());
+            values.put(DbContract.Day.WIND_SPEED, forecast.getWind().getSpeed());
+
+            try {
+                getContentResolver().insert(WeatherContentProvider.DAY_URI, values);
+
+            } catch (SQLiteException ignored) {
+                String selection = DbContract.Day.ID + " = " + forecast.getDt();
+                getContentResolver().update(WeatherContentProvider.DAY_URI, values, selection, null);
+            }
+        }
+
+        updateUIFromDB();
+    }
+
     private void fetchWeather() {
         String key = "61ae4591669ba9f38b46d26e6ee808d5";
         String units = "metric";
@@ -123,8 +212,7 @@ public class TenDaysActivity extends AppCompatActivity {
             public void onResponse(Call<TenDaysWeather> call, Response<TenDaysWeather> response) {
                 if (response.isSuccessful()) {
                     TenDaysWeather tenDaysWeather = response.body();
-                    adapter.setData(tenDaysWeather);
-                    adapter.notifyDataSetChanged();
+                    handleNetworkResponse(tenDaysWeather);
                 } else {
                     Toast.makeText(TenDaysActivity.this, "onResponse was unsuccessful", Toast.LENGTH_SHORT).show();
                 }
@@ -150,8 +238,7 @@ public class TenDaysActivity extends AppCompatActivity {
             void show (Forecast forecast);
         }
 
-        public void setData(TenDaysWeather tenDaysWeather) {
-            List<Forecast> forecasts = tenDaysWeather.getForecast();
+        public void setData(List<Forecast> forecasts) {
             for (Forecast forecast : forecasts) {
                 mForecast.add(forecast);
             }

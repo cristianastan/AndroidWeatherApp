@@ -13,7 +13,7 @@ public class Forecast {
     private Main main;
     @SerializedName("weather")
     @Expose
-    private java.util.List<Weather> weather;// = null;
+    private java.util.List<Weather> weather;
     @SerializedName("clouds")
     @Expose
     private Clouds clouds;

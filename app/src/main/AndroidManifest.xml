@@ -24,6 +24,11 @@
         </activity>
         <activity android:name=".DayDetailsActivity">
         </activity>
+        <provider
+            android:name=".database.WeatherContentProvider"
+            android:authorities="com.example.cristiana.weatherapp.provider"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>
