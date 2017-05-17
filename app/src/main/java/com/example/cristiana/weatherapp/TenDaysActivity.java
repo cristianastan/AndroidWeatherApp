@@ -124,7 +124,12 @@ public class TenDaysActivity extends AppCompatActivity {
     }
 
     private void updateUIFromDB() {
-        Cursor cursor = getContentResolver().query(WeatherContentProvider.DAY_URI, null, null, null, null);
+        /* Prepare selection to take the current location */
+        String selection = DbContract.Day.LOCATION + " = ?";
+        String[] selectionArgs = { mLocationName };
+
+        Cursor cursor = getContentResolver().query(WeatherContentProvider.DAY_URI, null, selection,
+                        selectionArgs, null, null);
 
         if (cursor != null) {
             /* Move to the first position */
